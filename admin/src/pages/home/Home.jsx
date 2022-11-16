@@ -44,8 +44,9 @@ export default function Home() {
   }, [MONTHS]);
 
   return (
+    
     <div className="home">
-      <FeaturedInfo />
+      
       <Chart
         data={userStats}
         title="User Analytics"

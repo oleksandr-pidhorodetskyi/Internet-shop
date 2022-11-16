@@ -10,11 +10,12 @@ import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
-  const [cat, setCat] = useState([]);
+  const [inputsArr, setinputsArr] = useState([]);
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -23,8 +24,10 @@ export default function NewProduct() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
+  const handleArr = (e) => {
+    setinputsArr((prev) => {
+      return { ...prev, [e.target.name]: e.target.value.split(", ") };
+    });
   };
 
   const handleClick = (e) => {
@@ -34,15 +37,9 @@ export default function NewProduct() {
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
@@ -57,21 +54,21 @@ export default function NewProduct() {
         }
       },
       (error) => {
-        // Handle unsuccessful uploads
+
       },
       () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = { ...inputs, img: downloadURL, categories: cat };
+          const product = { ...inputs, ...inputsArr, img: downloadURL};
           addProduct(product, dispatch);
         });
-        history.push("/products")
+        history.push("/")
       }
     );
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="newProduct">
       <h1 className="addProductTitle">New Product</h1>
       <form className="addProductForm">
@@ -112,7 +109,15 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Categories</label>
-          <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
+          <input name="categories" type="text" placeholder="jeans,skirts" onChange={handleArr} />
+        </div>
+        <div className="addProductItem">
+          <label>Size</label>
+          <input name="size" type="text" placeholder="M, L, XL" onChange={handleArr} />
+        </div>
+        <div className="addProductItem">
+          <label>color</label>
+          <input name="color" type="text" placeholder="blue, jellow" onChange={handleArr} />
         </div>
         <div className="addProductItem">
           <label>Stock</label>
@@ -121,10 +126,18 @@ export default function NewProduct() {
             <option value="false">No</option>
           </select>
         </div>
-        <button onClick={handleClick} className="addProductButton">
-          Create
-        </button>
+        <div className="addProductItem">
+          <label>Discount</label>
+          <select name="discount" onChange={handleChange}>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
       </form>
+      <button onClick={handleClick} className="addProductButton">
+          Create
+      </button>
     </div>
+    </>
   );
 }

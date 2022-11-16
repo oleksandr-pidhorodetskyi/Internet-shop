@@ -14,7 +14,13 @@
   object-fit: cover;
   margin-right: 10px;
 }
-
+.userList-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding-right: 20px;
+}
 .userListEdit{
     border: none;
     border-radius: 10px;

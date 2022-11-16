@@ -9,6 +9,11 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isSeller: {
+      type: Boolean,
+      default: false,
+    },
+    benefits: { type: Array},
     img: { type: String },
   },
   { timestamps: true }

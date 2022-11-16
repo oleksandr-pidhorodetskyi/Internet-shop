@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 
+
 export default function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
@@ -61,6 +62,11 @@ export default function ProductList() {
 
   return (
     <div className="productList">
+      <div className="btn-container">
+        <Link to="/newproduct">
+          <button className="productAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={products}
         disableSelectionOnClick

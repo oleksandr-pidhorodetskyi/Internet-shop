@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import { useHistory } from "react-router-dom";
+
 
 const Login = () => {
+  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
+
+    setTimeout(() => {
+      history.push("/")
+    }, 1000);
   };
 
   return (
@@ -34,9 +41,10 @@ const Login = () => {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleClick} style={{ padding: 10, width:100 }}>
-        Login
-      </button>
+        <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
+          Login
+        </button>
+
     </div>
   );
 };
