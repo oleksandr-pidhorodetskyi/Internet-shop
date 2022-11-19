@@ -48,7 +48,7 @@ export default function ProductList() {
         return (
           <>
             <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
+              <button className="productListEdit">Full info</button>
             </Link>
             <DeleteOutline
               className="productListDelete"
@@ -62,11 +62,6 @@ export default function ProductList() {
 
   return (
     <div className="productList">
-      <div className="btn-container">
-        <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
-        </Link>
-      </div>
       <DataGrid
         rows={products}
         disableSelectionOnClick

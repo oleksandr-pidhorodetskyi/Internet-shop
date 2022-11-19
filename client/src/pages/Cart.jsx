@@ -185,7 +185,6 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -196,6 +195,7 @@ const Cart = () => {
         history.push("/success", {
           stripeData: res.data,
           cart: cart,
+          price: price
         });
       } catch { }
     };

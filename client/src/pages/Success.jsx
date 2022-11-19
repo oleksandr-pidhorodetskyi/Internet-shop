@@ -10,6 +10,7 @@ const Success = () => {
   const location = useLocation();
   const data = location.state.stripeData;
   const cart = location.state.cart;
+  const price = location.state.price;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Success = () => {
             productId: item._id,
             quantity: item._quantity,
           })),
-          amount: cart.total,
+          amount: price,
           address: data.billing_details.address,
         });
         setOrderId(res.data._id);
