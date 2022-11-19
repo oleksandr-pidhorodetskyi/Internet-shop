@@ -221,9 +221,9 @@ const Cart = () => {
     })
     if(user?.benefits.length > 0 ) {
       res = price - (price*0.10)
-    }else {
-      setPrice(res)
     }
+    setPrice(res)
+    
   },[cart])
   return (
     <Container>

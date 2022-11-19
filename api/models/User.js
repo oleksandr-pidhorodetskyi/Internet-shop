@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema(
     },
     isSeller: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     benefits: { type: Array},
     img: { type: String },

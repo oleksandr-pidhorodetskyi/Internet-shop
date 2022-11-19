@@ -58,9 +58,13 @@ const Products = ({ cat, filters, sort }) => {
   return (
     <Container>
       {cat
-        ? filteredProducts.map((item) => <Product key={item.id} item={item}  />)
-        : products
-            .map((item) => <Product key={item.id} item={item}  />)}
+        ? filteredProducts.length != 0 
+          ? filteredProducts.map((item) => <Product key={item.id} item={item}  />) 
+          : <div>NO PRODUCTS</div>
+        : products.length != 0 
+          ? products.map((item) => <Product key={item.id} item={item}  />)
+          : <div>NO PRODUCTS</div>
+      }
     </Container>
   );
 };

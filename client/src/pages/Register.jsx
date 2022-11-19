@@ -87,12 +87,11 @@ const Register = () => {
         <Wrapper>
           <Title>CREATE AN ACCOUNT</Title>
           <Form>
-          {/* onChange={handleChange} */}
             <Input name="name" placeholder="name" />
             <Input name="username" placeholder="username/login" onChange={handleChange}/>
             <Input name="email" placeholder="email" onChange={handleChange}/>
-            <Input name="password" placeholder="password" onChange={handleChange}/>
-            <Input placeholder="confirm password" />
+            <Input name="password" type="password" placeholder="password" onChange={handleChange}/>
+            <Input type="password" placeholder="confirm password" />
             <div className="addProductItem">
               <label>Role: </label>
               <select name="isSeller" onChange={handleChange} >
