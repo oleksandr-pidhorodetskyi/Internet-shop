@@ -86,27 +86,23 @@ export default function Product() {
         </div>
       </div>
       <div className="productBottom">
-        <form className="productForm">
+        <div className="productForm">
           <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
-            <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
-            <label>Price</label>
-            <input type="text" placeholder={product.price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <p>Product Name</p>
+            <h2>{product.title}</h2>
+            <p>Product Description</p>
+            <h4>{product.desc}</h4>
+            <p>Price</p>
+            <h5>{product.price}</h5>
+            <p>In Stock</p>
+            {product.inStock==true && <h5>Yes</h5>}
           </div>
           <div className="productFormRight">
             <div className="productUpload">
               <img src={product.img} alt="product image" className="productUploadImg" />
-              <input type="file" id="file" style={{ display: "none" }} />
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
