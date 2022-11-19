@@ -214,17 +214,19 @@ const Cart = () => {
   };
   useEffect(() => {
     let res = cart.total
+    if(user?.benefits.length > 0 ) {
+      res = res - (res*0.10)
+    }
     cart.products.map((product) => { 
       if (product.discount) {
         res = res - (res*0.05)
+        console.log(res);
       } 
     })
-    if(user?.benefits.length > 0 ) {
-      res = price - (price*0.10)
-    }
     setPrice(res)
     
-  },[cart])
+  },[cart.total])
+  console.log(user);
   return (
     <Container>
       <Navbar />
@@ -312,7 +314,7 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             >
-              <Button>Continue</Button>
+              <Button disabled={user==null}>Continue</Button>
             </StripeCheckout>
           </Summary>
         </Bottom>
