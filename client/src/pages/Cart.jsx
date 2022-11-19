@@ -217,16 +217,17 @@ const Cart = () => {
     if(user?.benefits.length > 0 ) {
       res = res - (res*0.10)
     }
+    let disc = false
     cart.products.map((product) => { 
       if (product.discount) {
-        res = res - (res*0.05)
-        console.log(res);
+        disc = true
       } 
     })
-    setPrice(res)
-    
+    if(disc) {
+      res = res - (res*0.05)
+    }
+    setPrice(res.toFixed(2))
   },[cart.total])
-  console.log(user);
   return (
     <Container>
       <Navbar />
